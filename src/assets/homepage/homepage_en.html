@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>UNL Catalog Search</title>
+  <link href="./homepage.css" rel="stylesheet">
+</head>
+<body>
+<main class="main-landing-page display-flex flex-column flex-layout-center-center">
+  <div class="menu-container width-100">
+    <ul role="list" class="menu width-100">
+      <li role="listitem">
+        <a href="https://libraries.unl.edu/askus" id="ASKus_FAQs_link" aria-label="ASKus & FAQs" role="link">
+          <div class="icon display-flex icon-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#474746" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+</svg>
+          </div>
+          <span>ASKus &amp; FAQs</span>
+        </a>
+      </li>
+      <li role="listitem">
+        <a href="https://unl.libguides.com/LibraryTutorials/main#s-lg-box-wrapper-33748590" id="Videos_Tutorials_link" aria-label="Videos & Tutorials" role="link">
+          <div class="icon display-flex icon-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#474746" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+</svg>
+          </div>
+          <span>Videos &amp; Tutorials</span>
+        </a>
+      </li>
+      <li role="listitem">
+        <a href="https://libraries.unl.edu/subject-specialists/" id="Research_Assistance_link" aria-label="Research Assistance" role="link">
+          <div class="icon display-flex icon-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#474746" class="bi bi-person-raised-hand" viewBox="0 0 16 16">
+  <path d="M6 6.207v9.043a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H6.236a1 1 0 0 1-.447-.106l-.33-.165A.83.83 0 0 1 5 2.488V.75a.75.75 0 0 0-1.5 0v2.083c0 .715.404 1.37 1.044 1.689L5.5 5c.32.32.5.754.5 1.207"/>
+  <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+</svg>
+          </div>
+          <span>Research Assistance</span>
+        </a>
+      </li>
+		<li role="listitem">
+			<a href="https://libanswers.unl.edu/faq/290033" id="off_campus_access" tabindex="0" aria-label="Off campus access" role="link">
+          <div class="icon display-flex icon-color">
+			  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#474746" class="bi bi-house-check-fill" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+  <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"/>
+</svg>
+            
+
+          </div>
+          <span>Off-Campus Access</span>
+        </a>
+      </li>
+      <li role="listitem">
+			<a id="myLibraryCard" tabindex="0" aria-label="Go to my library card" role="link">
+          <div class="icon display-flex icon-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#474746" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M12 0a4 4 0 0 1 4 4v2.5h-1V4a3 3 0 1 0-6 0v2h.5A2.5 2.5 0 0 1 12 8.5v5A2.5 2.5 0 0 1 9.5 16h-7A2.5 2.5 0 0 1 0 13.5v-5A2.5 2.5 0 0 1 2.5 6H8V4a4 4 0 0 1 4-4"/>
+</svg>
+
+          </div>
+          <span>Library Account Login</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!--div class="flex-row flex-layout-space-between width-100 welcome-announcements-container">
+    <div class="welcome display-flex flex-column flex-layout-start">
+      <h2 aria-level="2" role="heading" class="welcome-title mat-headline-medium ">Welcome to the library</h2>
+      <span class="welcome-content">Access your account by signing in and enabling more capabilities</span>
+      <a id="myLibraryCard2" tabindex="0" aria-label="Go to my library card" role="link">Go to my library card</a>
+    </div>
+    <div class="announcements display-flex flex-column">
+      <header class="flex-column gap-1">
+        <h2 class="mat-title-medium" role="heading" aria-level="2">Announcements:</h2>
+        <h3 role="heading" aria-level="3" class="announcements-item-title mat-headline-medium">New library resources</h3>
+      </header>
+      <article>
+        <p class="mat-body-large">Lorem ipsum dolor sit amet consectetur. Varius ipsum amet elit convallis. Egestas arcu volutpat morbi urna
+          cursus amet.</p>
+      </article>
+
+    </div>
+  </div-->
+
+  <div class="about display-flex width-100">
+    <div class="about-content flex-row">
+      <div class="about-text">
+        <h2 role="heading" aria-level="2" class="about-text-title mat-headline-large">About the Libraries Catalog</h2>
+        <p class="about-text-description">
+          Search for books, articles, databases and many more resources in digital and print formats. </p>
+        <div class="help-sign-in-container">
+          <span>Signing in to your account allows you to:</span>
+          <ul>
+            <li>
+              <img alt="Library image" src="assets/images/homePageImages/success.svg">
+              <span> Renew books and library materials</span>
+            </li>
+            <li>
+              <img alt="Library image" src="assets/images/homePageImages/success.svg">
+              <span> Request items</span>
+			  </li>
+            <li>
+              <img alt="Library image" src="assets/images/homePageImages/success.svg">
+              <span> Create a list of favorites</span>
+			  </li>
+            <li>
+              <img alt="Library image" src="assets/images/homePageImages/success.svg">
+              <span> Save your searches</span>
+			  </li>
+			<li>
+              <img alt="Library image" src="assets/images/homePageImages/success.svg">
+              <span> Export citations</span>
+			  </li>
+          </ul>
+        </div>
+      </div>
+      <!--div class="about-image flex-layout-center-center">
+        <img alt="" src="assets/images/homePageImages/about_image.svg">
+      </div-->
+    </div>
+  </div>
+</main>
+</main>
+</body>
+</html>
