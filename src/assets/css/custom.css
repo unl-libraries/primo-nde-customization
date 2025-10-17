@@ -1,0 +1,39 @@
+/* BEGIN ASKUS Chat Widget -- NW
+-- changes applied 2/1/2023 by srickel1 marked with comment 2-2023-libchat*/
+
+a#lcs_slide_out_button-24754 { /* 2-2023-libchat: changed from lcs_slide_out_button-21928 to lcs_slide_out_button-24754*/
+  text-align: center;
+  padding: 10px;
+  display: block;
+  position: absolute;
+  border-width: 0;
+  border-style: none;
+  background-color: transparent;
+  margin-bottom: -4px;
+}
+/* adds focus to libchat button */
+/*2-2023-libchat: changed from a#lcs_slide_out_button-21928:focus to a#lcs_slide_out_button-24754:focus*/
+a#lcs_slide_out_button-24754:focus {
+  border-top: double #007197;
+  border-left: double #007197;
+  border-right: double #007197;
+  border-top-right-radius:5px;
+  border-top-left-radius:5px;
+}
+
+.lcs_slide_out header a {
+    text-align: center;
+    padding: 10px;
+    display: block;
+    position: absolute;
+    border-width: 0;
+    border-style: none;
+    background-color: transparent;
+    margin-bottom: -4px;
+}
+
+.lcs_slide_out-b header a {
+    left: 10px;
+    bottom: 0px;
+    border-width: 0px 0px 0px 0px;
+}
