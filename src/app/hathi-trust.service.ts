@@ -16,7 +16,7 @@ export class HathiTrustService {
   
   lookup(ids: []): Observable<any>{
 	
-    if (ids.length > 0) {
+    if (ids && ids.length > 0) {
       var hathiTrustLookupUrl = this.hathiTrustBaseUrl + ids.join('|');
       const req$ = this.http.jsonp(hathiTrustLookupUrl,'callback').pipe(
 		map(response => { return response;}),

@@ -100,7 +100,7 @@ export class HathiTrustAvailabilityComponent implements OnInit {
 				return 'oclc:'+id.toLowerCase().replace('(ocolc)','');
 			});
 		}
-		if (hathiTrustIds.length > 0) {
+		if (hathiTrustIds && (hathiTrustIds.length > 0)) {
 			if (this.ignoreCopyright){
 				this.hathiTrust.findRecord(hathiTrustIds).subscribe((url) => {
 						if (url) this.fullTextLink = this.entityID ?  url + '?signon=swle:'+ this.entityID : url;
@@ -120,11 +120,11 @@ export class HathiTrustAvailabilityComponent implements OnInit {
 	} 
 	
 	isJournal = (record: any): boolean =>{
-		console.debug("Checking record content type");
+		//console.debug("Checking record content type");
 		if (record && record.pnx){
 			if (record.pnx.display && record.pnx.display.type) {
 			    var contentType = record.pnx.display.type[0].trim().toLowerCase();
-				console.debug("Content type:",contentType);
+				//console.debug("Content type:",contentType);
 		       if (contentType?.indexOf('journal') > -1) {
 			         return true;
 		       }
@@ -135,6 +135,7 @@ export class HathiTrustAvailabilityComponent implements OnInit {
 	
 	isOnline = (record: any): boolean =>{
 		//console.debug("Checking online status");
+		if (record && record.pnx && record.pnx.delivery) {console.debug(record.pnx);}
 		return false;
 	}
 	
