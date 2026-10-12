@@ -2,6 +2,7 @@
 // ng serve --proxy-config ./proxy/proxy.conf.mjs   
 const environments = {
     'example': 'https://myPrimoVE.com',
+    'unl': 'https://unl.primo.exlibrisgroup.com'
   }
   
-  export const PROXY_TARGET = environments['example']; 
+  export const PROXY_TARGET = environments['unl']; 
