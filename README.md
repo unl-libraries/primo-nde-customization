@@ -11,6 +11,27 @@ To start proxy mode use the command:
 npm run start:proxy
 ```
 
+### How the asset manifest is resolved in proxy mode
+
+When running in proxy mode, requests to `/custom/*/asset-manifest.json` are answered with a manifest
+computed at runtime (nothing is ever written to disk) by merging three sources:
+
+- The **remote** manifest from your configured `PROXY_TARGET` environment.
+- Your **locally built** output at `dist/{INST_ID}-{VIEW_ID}` (named from `build-settings.env`) — this
+  is where compiled/bundled files such as the generated `custom.css` or `remoteEntry.js` live.
+- Your **local `src/assets`** folder — scanned live on every request.
+
+Because the built output is only picked up if it already exists on disk, **you must run `npm run build`
+at least once before starting proxy mode** so that `dist/{INST_ID}-{VIEW_ID}` is present; otherwise only
+files under `src/assets` will show up in the manifest, and compiled-only files (like a root-level
+`custom.css`) will appear to be missing.
+
+After that initial build:
+- Changes under `src/assets` are picked up immediately on the next request — no rebuild needed.
+- Changes to compiled/bundled files (e.g. theme/SCSS changes, code changes) require re-running
+  `npm run build` to refresh `dist/{INST_ID}-{VIEW_ID}`; no dev-server restart is needed, the proxy
+  re-scans the folder on every manifest request.
+
 ---
 
 ### Overview
@@ -19,7 +40,7 @@ npm run start:proxy
 The NDE Customization package offers options to enhance and extend the functionality of Primo’s New Discovery Experience (NDE). You can add and develop your own components, customize theme templates, and tailor the discovery interface to your specific needs.
 
 **Note:**
-<mark>This branch includes updates and other improvements that will be compatible with the April 2025 release of NDE. We will merge this branch to the main one when it is compatible with released version of NDE.</mark>
+<mark>This branch includes updates and other improvements that are compatible with the December 2025 release of NDE.</mark>
 
 **Note:**
 The NDE Customization package is currently available exclusively to Primo customers who have early access to the New Discovery Experience (NDE). Further availability will be announced in upcoming releases.
@@ -78,8 +99,8 @@ The NDE Customization package is currently available exclusively to Primo custom
 
 There are two options for setting up your local development environment: configuring a proxy or using parameter on your NDE URL.
 
-- **Option 1: Update `proxy.conf.mjs` Configuration**:
-  - Set the URL of the server you want to test your code with by modifying the `proxy.conf.mjs` file in the `./proxy` directory:
+- **Option 1: Update `proxy.const.mjs` Configuration**:
+  - Set the URL of the server you want to test your code with by modifying the proxy.const.mjs file in the ./proxy directory:
     ```javascript
     // Configuration for the development proxy
     const environments = {
@@ -177,6 +198,89 @@ Or as Observable:
 ```angular2html
 isLoggedIn$ = this.store.select(selectIsLoggedIn);
 ```
+### Automatic assets public path (`assets/...`)
+
+If your custom module/add-on is hosted under a dynamic base URL, plain template URLs like:
+
+```html
+<img src="assets/images/logo.png" />
+```
+may break, because the browser resolves them relative to the host page.
+
+To fix this, we provide:
+
+src/app/services/assets-public-path.directive.ts
+
+This directive automatically rewrites any src / href that starts with assets/ (or /assets/) to:
+
+```js
+__webpack_public_path__ + 'assets/...'
+```
+Import the directive in a component (Standalone)
+Add the directive to the component imports:
+
+```js
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { AssetsPublicPathDirective } from '../services/assets-public-path.directive';
+
+@Component({
+  selector: 'custom-example',
+  standalone: true,
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.scss'],
+  imports: [CommonModule, AssetsPublicPathDirective],
+})
+export class ExampleComponent {}
+```
+If the component is not standalone (NgModule-based), import and export the directive from a shared module, and include that module where your components are declared.
+
+Use it in HTML
+After the directive is imported, you can use plain assets/... paths in templates:
+
+
+```html
+<!-- Images -->
+<img src="assets/images/logo.png" alt="Logo">
+
+<!-- Icons / SVG -->
+<img src="assets/homepage/clock.svg" alt="Clock">
+
+<!-- Links to files -->
+<a href="assets/files/help.pdf">Help</a>
+```
+Supported attributes/elements (common cases):
+
+img[src]
+
+source[src]
+
+script[src]
+
+link[href]
+
+a[href]
+
+### Accessing app router
+
+- You can gain access to the app router service by injecting the SHELL_ROUTER  injection token to your component:
+
+```angular2html
+import {SHELL_ROUTER} from "../../injection-tokens"; //the import path may vary on your project
+private router = inject(SHELL_ROUTER);
+```
+
+- Listening for router navigation events. For example:
+
+```angular2html
+this.routerSubscription = this.router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd) {
+        console.log('Tracking PageView: ', event.urlAfterRedirects);
+    }
+});
+```
+
+
 
 ### Translating from code tables 
 
@@ -246,7 +350,7 @@ The NDE UI add-on framework allows various stakeholders to develop and integrate
 
 Library staff can easily add, configure, and manage these add-ons through Alma, following guidelines provided by the stakeholders. These typically include:
 
-- **Add-on Name** – The identifier used in Alma’s configuration.
+- **Add-on Name** – The identifier used in Alma’s configuration. This must match the add-on name as set when developing the add-on in the [section](#set-add-on-name) below. 
 - **Add-on URL** – The location where the add-on is hosted (static folder to load the add-on at runtime).
 - **Configuration Parameters** – JSON-based config parameters to be referenced at runtime by the add-on.
 
